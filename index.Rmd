@@ -1,0 +1,255 @@
+---
+title: "Why Shiny modules will (really) make future you smile!"
+author: 
+  - "Eric Nantz"
+date: 'South Coast MA UseR Group'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      ratio: "16:9"
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+class: center, middle 
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# `r rmarkdown::metadata$title`
+
+## `r rmarkdown::metadata$subtitle`
+
+`r rmarkdown::metadata$author`
+
+South Coast MA UseR! Group | 6 November 2020
+
+.twitter[
+@theRcast
+]
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r metathis, echo=FALSE}
+metathis::meta_social(
+  title = "Why Shiny modules will (really) make future you smile!",
+  description = "Presentation and demonstration of Shiny modules at the South Coast MA UseR Group on November 6th, 2020",
+  twitter_card_type = "summary_large_image",
+  #image = "https://slides.garrickadenbuie.com/extra-special-xaringan/images/social-card.png",
+  image_alt = "Alt slide",
+  twitter_creator = "@theRcast",
+  og_type = "website",
+  og_author = "Eric Nantz",
+  url = "https://slides.garrickadenbuie.com/extra-special-xaringan"
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#1381B0",
+  secondary_color = "#FF961C",
+  inverse_header_color = "#FFFFFF"
+)
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons", "panelset"))
+```
+
+---
+class: middle, center
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# Find me at ...
+
+[`r icon::fa("github")` @rpodcast](https://github.com/rpodcast)  
+
+[`r icon::fa("twitter")` @theRcast](https://twitter.com/theRcast) 
+
+[`r icon::fa("tv")` Shiny Developer Series](https://shinydevseries.com) 
+
+[`r icon::fa("microphone")` R Podcast](https://r-podcast.org) 
+
+[`r icon::fa("microphone")` R Weekly Highlights](https://rweekly.fireside.fm/) 
+
+---
+
+# Why should you care?
+
+.right-column[
+```{r homer-gif1, out.width = '100%', echo=FALSE}
+knitr::include_graphics("images/futurehomeproblem.gif")
+```
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+]
+
+---
+
+# Why should you care?
+
+.right-column[
+```{r homer-gif2, out.width = '100%', echo=FALSE}
+knitr::include_graphics("images/futurehomeproblem.gif")
+```
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+* Repeating yourself gets old even **more quickly**!
+]
+
+---
+
+# Why should you care?
+
+.right-column[
+```{r homer-gif3, out.width = '100%', echo=FALSE}
+knitr::include_graphics("images/futurehomeproblem.gif")
+```
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+* Repeating yourself gets old even **more quickly**!
+* Organizes app into *distinct* and *composable* pieces
+]
+
+---
+
+# Modules sound hard ...
+
+The technical benefits of modules are not exactly intuitive to a new Shiny developer:
+
+- A smaller version of a Shiny app
+- Avoid namespace collisions when using same widget across different parts of your app
+- Always composed of 2 components: UI and Server
+
+--
+
+### Do you have to be an expert Shiny Developer to use modules?
+
+--
+
+![](https://media.giphy.com/media/3o6wrASxYzLbE9JWE0/giphy.gif)
+
+---
+
+# Creating a Module
+
+.panelset[
+.panel[.panel-name[RStudio Snippet]
+
+```r
+snippet shinymod
+	${1:name}_UI <- function(id) {
+	  ns <- NS(id)
+	  tagList(
+		${0}
+	  )
+	}
+	
+	${1:name}_mod <- function(input, output, session) {
+	  
+	}
+```
+]
+
+.panel[.panel-name[Golem]
+
+```r
+golem::add_module("plot")
+```
+
+]
+
+.panel[.panel-name[UI Component]
+
+```r
+#' plot UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd 
+#'
+#' @importFrom shiny NS tagList 
+mod_plot_ui <- function(id){
+  ns <- NS(id)
+  tagList(
+ 
+  )
+}
+```
+
+]
+
+.panel[.panel-name[Server Component]
+
+```r
+#' plot Server Function
+#'
+#' @noRd 
+mod_plot_server <- function(input, output, session){
+  ns <- session$ns
+ 
+}
+```
+]
+
+.panel[.panel-name[Calls]
+
+```r
+## To be copied in the UI
+# mod_plot_ui("plot_ui_1")
+    
+## To be copied in the server
+# callModule(mod_plot_server, "plot_ui_1")
+```
+
+]
+]
+
+---
+class: middle, center
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# Demo Time!
+
+---
+class: center
+
+<blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">It was long 🕗 coming ... here&#39;s my 1st-ever <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> post! <br>🦕 Meet {shinysaurus}, a <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/shiny?src=hash&amp;ref_src=twsrc%5Etfw">#shiny</a> app exploring the datasaurus dozen!<br>📹 I joined <a href="https://twitter.com/ellis_hughes?ref_src=twsrc%5Etfw">@ellis_hughes</a> &amp; <a href="https://twitter.com/OSPpatrick?ref_src=twsrc%5Etfw">@OSPpatrick</a> in <a href="https://twitter.com/tidy_explained?ref_src=twsrc%5Etfw">@tidy_explained</a> TidyX ep32! <a href="https://t.co/7ADOHex3rg">https://t.co/7ADOHex3rg</a><br>📊 app: <a href="https://t.co/WOWfrQXEj6">https://t.co/WOWfrQXEj6</a><br><br>demo 👇 <a href="https://t.co/ksbs8KVHyf">pic.twitter.com/ksbs8KVHyf</a></p>&mdash; The R-Podcast (Eric) (@theRcast) <a href="https://twitter.com/theRcast/status/1317920405387157505?ref_src=twsrc%5Etfw">October 18, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+---
+
+# Levelling Up
+
+- [A beginner's guide to Shiny modules by Emily Riederer](https://emilyriederer.netlify.app/post/shiny-modules)
+- [`shinySaurus` application](https://github.com/rpodcast/shinysaurus)
+- Effective use of Shiny Modules talk from `rstudio::conf(2019)`: [repo](https://github.com/rpodcast/rsconf-2019), [slides](https://bit.ly/modules2019), [recording](https://rstudio.com/resources/rstudioconf-2019/effective-use-of-shiny-modules-in-application-development/)
+- [Using {shiny} Modules](https://engineering-shiny.org/structure.html#using-shiny-modules) chapter from [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/) 
+- [Shiny Modules](https://mastering-shiny.org/scaling-modules.html) chapter from [Mastering Shiny](https://mastering-shiny.org/index.html)
+- [Communication between modules and its whims](https://rtask.thinkr.fr/blog/communication-between-modules-and-its-whims/=)
+- Shiny Developer Series: [shinydevseries.com](https://shinydevseries.com)
+
+

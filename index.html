@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Why Shiny modules will (really) make future you smile!</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eric Nantz" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <meta name="twitter:title" content="Why Shiny modules will (really) make future you smile!"/>
+    <meta name="twitter:description" content="Presentation and demonstration of Shiny modules at the South Coast MA UseR Group on November 6th, 2020"/>
+    <meta name="twitter:url" content="https://slides.garrickadenbuie.com/extra-special-xaringan"/>
+    <meta name="twitter:image:alt" content="Alt slide"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@theRcast"/>
+    <meta name="twitter:site" content="@theRcast"/>
+    <meta property="og:title" content="Why Shiny modules will (really) make future you smile!"/>
+    <meta property="og:description" content="Presentation and demonstration of Shiny modules at the South Coast MA UseR Group on November 6th, 2020"/>
+    <meta property="og:url" content="https://slides.garrickadenbuie.com/extra-special-xaringan"/>
+    <meta property="og:image:alt" content="Alt slide"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Eric Nantz"/>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: center, middle 
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# Why Shiny modules will (really) make future you smile!
+
+## 
+
+Eric Nantz
+
+South Coast MA UseR! Group | 6 November 2020
+
+.twitter[
+@theRcast
+]
+
+
+
+
+
+
+
+
+
+---
+class: middle, center
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# Find me at ...
+
+[<i class="fab  fa-github "></i> @rpodcast](https://github.com/rpodcast)  
+
+[<i class="fab  fa-twitter "></i> @theRcast](https://twitter.com/theRcast) 
+
+[<i class="fas  fa-tv "></i> Shiny Developer Series](https://shinydevseries.com) 
+
+[<i class="fas  fa-microphone "></i> R Podcast](https://r-podcast.org) 
+
+[<i class="fas  fa-microphone "></i> R Weekly Highlights](https://rweekly.fireside.fm/) 
+
+---
+
+# Why should you care?
+
+.right-column[
+&lt;img src="images/futurehomeproblem.gif" width="100%" /&gt;
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+]
+
+---
+
+# Why should you care?
+
+.right-column[
+&lt;img src="images/futurehomeproblem.gif" width="100%" /&gt;
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+* Repeating yourself gets old even **more quickly**!
+]
+
+---
+
+# Why should you care?
+
+.right-column[
+&lt;img src="images/futurehomeproblem.gif" width="100%" /&gt;
+]
+
+.left-column[
+
+* Shiny apps often become popular **quickly**
+* Repeating yourself gets old even **more quickly**!
+* Organizes app into *distinct* and *composable* pieces
+]
+
+---
+
+# Modules sound hard ...
+
+The technical benefits of modules are not exactly intuitive to a new Shiny developer:
+
+- A smaller version of a Shiny app
+- Avoid namespace collisions when using same widget across different parts of your app
+- Always composed of 2 components: UI and Server
+
+--
+
+### Do you have to be an expert Shiny Developer to use modules?
+
+--
+
+![](https://media.giphy.com/media/3o6wrASxYzLbE9JWE0/giphy.gif)
+
+---
+
+# Creating a Module
+
+.panelset[
+.panel[.panel-name[RStudio Snippet]
+
+```r
+snippet shinymod
+	${1:name}_UI &lt;- function(id) {
+	  ns &lt;- NS(id)
+	  tagList(
+		${0}
+	  )
+	}
+	
+	${1:name}_mod &lt;- function(input, output, session) {
+	  
+	}
+```
+]
+
+.panel[.panel-name[Golem]
+
+```r
+golem::add_module("plot")
+```
+
+]
+
+.panel[.panel-name[UI Component]
+
+```r
+#' plot UI Function
+#'
+#' @description A shiny Module.
+#'
+#' @param id,input,output,session Internal parameters for {shiny}.
+#'
+#' @noRd 
+#'
+#' @importFrom shiny NS tagList 
+mod_plot_ui &lt;- function(id){
+  ns &lt;- NS(id)
+  tagList(
+ 
+  )
+}
+```
+
+]
+
+.panel[.panel-name[Server Component]
+
+```r
+#' plot Server Function
+#'
+#' @noRd 
+mod_plot_server &lt;- function(input, output, session){
+  ns &lt;- session$ns
+ 
+}
+```
+]
+
+.panel[.panel-name[Calls]
+
+```r
+## To be copied in the UI
+# mod_plot_ui("plot_ui_1")
+    
+## To be copied in the server
+# callModule(mod_plot_server, "plot_ui_1")
+```
+
+]
+]
+
+---
+class: middle, center
+
+background-image: url(images/title_background.jpg)
+background-size: cover
+
+# Demo Time!
+
+---
+class: center
+
+&lt;blockquote class="twitter-tweet tw-align-center"&gt;&lt;p lang="en" dir="ltr"&gt;It was long 🕗 coming ... here&amp;#39;s my 1st-ever &lt;a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#TidyTuesday&lt;/a&gt; post! &lt;br&gt;🦕 Meet {shinysaurus}, a &lt;a href="https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rstats&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/shiny?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#shiny&lt;/a&gt; app exploring the datasaurus dozen!&lt;br&gt;📹 I joined &lt;a href="https://twitter.com/ellis_hughes?ref_src=twsrc%5Etfw"&gt;@ellis_hughes&lt;/a&gt; &amp;amp; &lt;a href="https://twitter.com/OSPpatrick?ref_src=twsrc%5Etfw"&gt;@OSPpatrick&lt;/a&gt; in &lt;a href="https://twitter.com/tidy_explained?ref_src=twsrc%5Etfw"&gt;@tidy_explained&lt;/a&gt; TidyX ep32! &lt;a href="https://t.co/7ADOHex3rg"&gt;https://t.co/7ADOHex3rg&lt;/a&gt;&lt;br&gt;📊 app: &lt;a href="https://t.co/WOWfrQXEj6"&gt;https://t.co/WOWfrQXEj6&lt;/a&gt;&lt;br&gt;&lt;br&gt;demo 👇 &lt;a href="https://t.co/ksbs8KVHyf"&gt;pic.twitter.com/ksbs8KVHyf&lt;/a&gt;&lt;/p&gt;&amp;mdash; The R-Podcast (Eric) (@theRcast) &lt;a href="https://twitter.com/theRcast/status/1317920405387157505?ref_src=twsrc%5Etfw"&gt;October 18, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt; 
+
+---
+
+# Levelling Up
+
+- [A beginner's guide to Shiny modules by Emily Riederer](https://emilyriederer.netlify.app/post/shiny-modules)
+- [`shinySaurus` application](https://github.com/rpodcast/shinysaurus)
+- Effective use of Shiny Modules talk from `rstudio::conf(2019)`: [repo](https://github.com/rpodcast/rsconf-2019), [slides](https://bit.ly/modules2019), [recording](https://rstudio.com/resources/rstudioconf-2019/effective-use-of-shiny-modules-in-application-development/)
+- [Using {shiny} Modules](https://engineering-shiny.org/structure.html#using-shiny-modules) chapter from [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/) 
+- [Shiny Modules](https://mastering-shiny.org/scaling-modules.html) chapter from [Mastering Shiny](https://mastering-shiny.org/index.html)
+- [Communication between modules and its whims](https://rtask.thinkr.fr/blog/communication-between-modules-and-its-whims/=)
+- Shiny Developer Series: [shinydevseries.com](https://shinydevseries.com)
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true,
+"slideNumberFormat": "%current%"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

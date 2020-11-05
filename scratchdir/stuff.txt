@@ -1,0 +1,22 @@
+.center[
+  <table style="border-style:none;padding-top:30px;" class=".table">
+    <tr>
+    <th style="padding-right:25px!important" align="center"><a href="https://twitter.com/thercast"> <i class="fab fa-twitter fa-3x"></i> </a></th>
+    <th style="padding-left:25px!important" align="center"><a href="https://github.com/rpodcast"> <i class="fab fa-github fa-3x"></i> </a></th>
+    <th style="padding-left:25px!important" align="center"><a href="https://gitlab.com/rpodcast"> <i class="fab fa-gitlab fa-3x"></i> </a></th>
+    <th style="padding-left:25px!important" align="center"><a href="https://r-podcast.org"> <i class="fa fa-microphone fa-3x"></i> </a></th>
+    <th style="padding-left:25px!important" align="center"><a href="https://shinydevseries.com"> <i class="fa fa-tv fa-3x"></i> </a></th>
+    </tr>
+    <tr style="background-color:#fafafa">
+    <th style="padding-right:25px!important"><a href="https://twitter.com/thercast"> @thercast </a></th>
+    <th style="padding-left:25px!important"><a href="https://github.com/rpodcast"> @rpodcast </a></th>
+    <th style="padding-left:25px!important"><a href="https://gitlab.com/rpodcast"> @rpodcast </a></th>
+    <th style="padding-left:25px!important"><a href="https://r-podcast.org"> r-podcast.org </a></th>
+    <th style="padding-left:25px!important"><a href="https://shinydevseries.com"> shinydevseries.com </a></th>
+    </tr></table>
+]
+
+Other efforts in the community:
+  * Curator for [R Weekly](https://rweekly.org/)
+* [RStudio Community](https://community.rstudio.com/) sustainer
+* Member of [Rbind](https://support.rbind.io/) administrator team
