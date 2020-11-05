@@ -12,6 +12,8 @@ November 5, 2020
 
 > The `shiny` package for creating web applications directly with R code has undenieably been one of the biggest revolutions in the R community, enabling users to quickly launch a dynamic frontend for any data analysis or pipeline. Very often, a simple application begins to grow in complexity as customers ask for more features and capabilties.  Which feature that comes standard in Shiny can help you navigate this journey?  That would be the ability to create Shiny modules!  In this talk, I will share the key benefits of using modules for all types of apps as well as demonstrate a fully modularized application.
 
+Slides are available at [bit.ly/shinymod2020](https://bit.ly/shinymod2020)
+
 ## Additional Resources
 
 - [A beginner's guide to Shiny modules by Emily Riederer](https://emilyriederer.netlify.app/post/shiny-modules)
