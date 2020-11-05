@@ -1,7 +1,9 @@
 # Why Shiny modules will (really) make future you smile!
 
-Eric Nantz
-[South Coast MA UseR Group](https://www.meetup.com/South-Coast-useR-Group) November 5, 2020
+Eric Nantz 
+Twitter: [@theRcast](https://twitter.com/theRcast)
+[South Coast MA UseR Group](https://www.meetup.com/South-Coast-useR-Group) 
+November 5, 2020
 
 ## Abstract
 
