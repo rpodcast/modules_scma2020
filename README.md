@@ -14,6 +14,10 @@ November 5, 2020
 
 ## Additional Resources
 
+- [A beginner's guide to Shiny modules by Emily Riederer](https://emilyriederer.netlify.app/post/shiny-modules)
 - [`shinySaurus` application](https://github.com/rpodcast/shinysaurus)
 - Effective use of Shiny Modules talk from `rstudio::conf(2019)`: [repo](https://github.com/rpodcast/rsconf-2019), [slides](https://bit.ly/modules2019), [recording](https://rstudio.com/resources/rstudioconf-2019/effective-use-of-shiny-modules-in-application-development/)
-
+- [Using {shiny} Modules](https://engineering-shiny.org/structure.html#using-shiny-modules) chapter from [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/) 
+- [Shiny Modules](https://mastering-shiny.org/scaling-modules.html) chapter from [Mastering Shiny](https://mastering-shiny.org/index.html)
+- [Communication between modules and its whims](https://rtask.thinkr.fr/blog/communication-between-modules-and-its-whims/=)
+- Shiny Developer Series: [shinydevseries.com](https://shinydevseries.com)
