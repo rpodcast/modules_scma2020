@@ -34,6 +34,8 @@ South Coast MA UseR! Group | 6 November 2020
 @theRcast
 ]
 
+Slides available at [bit.ly/shinymod2020](https://bit.ly/shinymod2020)
+
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
@@ -48,7 +50,7 @@ metathis::meta_social(
   twitter_creator = "@theRcast",
   og_type = "website",
   og_author = "Eric Nantz",
-  url = "https://slides.garrickadenbuie.com/extra-special-xaringan"
+  url = "https://bit.ly/shinymod2020"
 )
 ```
 
